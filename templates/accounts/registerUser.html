@@ -71,23 +71,30 @@
                                                     <div class="field-holder">
                                                         <div class="payment-holder">
                                                             <div class="checkbox-area">
-                                                                <input type="checkbox" id="terms-59054637"
-                                                                    name="terms-59054637"
-                                                                    class="foodbakery-dev-req-field">
-                                                                <label for="terms-59054637">
-                                                                    By Registering You Confirm That You Accept The
-                                                                    <a target="_blank" href="contact-us.html">Terms
-                                                                        &amp; conditions </a>
-                                                                    And <a target="_blank"
-                                                                        href="price-plans.html">Privacy Policy </a>
-                                                                </label>
+                                                                <ul class="errorlist">
+                                                                    <li style="color: red;">{{form.non_field_errors}}
+                                                                    </li>
+
+                                                                    {% for field in form %}
+                                                                    {% if field.errors %}
+                                                                    {% for error in field.errors %}
+                                                                    <li style="color:red">{{error}}</li>
+
+
+                                                                    {% endfor %}
+                                                                    {% endif %}
+                                                                    {% endfor %}
+                                                                </ul>
                                                             </div>
                                                             <input type="submit" value="Next"
                                                                 id="btn-next-restaurant-information" class="bgcolor">
                                                         </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                                        <div class="row">
+                                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                                <!-- load message -->
+                                                                {% include 'includes/alerts.html' %}
+                                                            </div>
+                                                        </div>
                                         </li>
                                     </ul>
                                 </form>

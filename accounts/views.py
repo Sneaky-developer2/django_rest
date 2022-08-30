@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .forms import UserForm
 from .models import User
+from django.contrib import messages
 
 
 # Create your views here.
@@ -8,11 +9,11 @@ from .models import User
 def registerUser(request):
     if request.method == 'POST':
         print(request.POST)
-        form = UserForm(request.POST)
+        form = UserForm (request.POST)
         if form.is_valid():
 
             """
-            this way we hash tag but there is also a second way 
+            this way we hash the password but there is also a second way 
             starts at line 25
             password = form.cleaned_data['password']
             user = form.save(commit=False)
@@ -32,8 +33,14 @@ def registerUser(request):
                 username=username, email=email, password=password)
             user.role = User.CUSTOMER
             user.save()
+            messages.success(
+                request, 'your account has been registerd sucessfully!!')
 
             return redirect('registerUser')
+        else:
+            print('invaled form')
+            print(form.errors)
+
     else:
         form = UserForm()
     context = {
