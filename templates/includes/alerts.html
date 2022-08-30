@@ -39,7 +39,7 @@
 
 {% if messages %}
 {% for message in messages %}
-<div class="alert success show-notification">
+<div class="alert {{message.tags}} show-notification">
     <span class="closebtn">&times;</span>
     {{message}}
 </div>
