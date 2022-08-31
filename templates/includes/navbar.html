@@ -107,12 +107,24 @@
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                         <div class="login-option">
-                            <a class="cs-color cs-popup-joinus-btn login-popup mr-0" data-target="#sign-in"
-                                data-toggle="modal" href="#user-register">Login</a>
-                                <span><a class="cs-color cs-popup-joinus-btn login-popup " style="margin-left: 0;" href="{% url 'registerUser' %}">/Register</a></span>
+                            {% if user.is_authenticated %}
+
+                            <a class="cs-color cs-popup-joinus-btn login-popup" style="color: green;"
+                                href="{% url 'dashboard' %}">My
+                                Account</a>
+                            <a class="cs-color cs-popup-joinus-btn login-popup" style="color: red;"
+                                href="{% url 'logout' %}">Logout</a>
+
+                            {% else %}
+                            <a class="cs-color cs-popup-joinus-btn login-popup mr-0" href="{% url 'login' %}">Login</a>
+                            <span><a class="cs-color cs-popup-joinus-btn login-popup " style="margin-left: 0;"
+                                    href="{% url 'registerUser' %}">/Register</a></span>
                             <a class="get-start-btn" href="{% url 'registerVendor' %}">
                                 Register
                                 Restaurant </a>
+
+
+                            {% endif %}
                         </div>
                     </div>
                 </div>
