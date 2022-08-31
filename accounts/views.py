@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from accounts.utils import detectUser
+from accounts.utils import detectUser, send_verification_email
 
 from vendor.forms import VendorForm
 from .forms import UserForm
@@ -62,6 +62,8 @@ def registerUser(request):
             user.role = User.CUSTOMER
             user.save()
 
+            # Send verification email
+            send_verification_email(request, user)
             messages.success(
                 request, 'your account has been registerd sucessfully!!')
 
