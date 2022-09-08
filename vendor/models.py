@@ -14,4 +14,9 @@ class Vendor(models.Model):
     modified_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.vendor_name
+        return self.vendor_name 
+
+    def save(self, *args, **kwargs):
+        return super(Vendor, self).save(*args, **kwargs)
+
+
