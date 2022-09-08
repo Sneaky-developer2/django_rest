@@ -1,0 +1,12 @@
+{% autoescape off %}
+
+Hi {{user.first_name}},
+{% if is_approved %}
+Congratulations! your restaurant has been approved by the admin.
+{% else %}
+we're sorry! you are not eligible for publishing your food menu on our marketplace.
+for more details, please contact noob1384noob1384@gmail.com .
+
+{% endif %}
+
+{% endautoescape %}
