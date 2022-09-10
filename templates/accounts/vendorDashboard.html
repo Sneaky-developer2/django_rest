@@ -3,7 +3,7 @@
 
 {% block content %}
 
-
+<link rel="stylesheet" href="{% static 'assets/css/card.css' %}">
 
 <!-- Main Section Start -->
 <div class="main-section">
@@ -15,54 +15,55 @@
                 <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
                     <!-- Load v_sidebar HERE! -->
                     {% include 'includes/v_sidebar.html' %}
-                </div>
+
+                </div name="div-card">
                 <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
                     <div class="user-dashboard loader-holder">
                         <div class="user-holder">
 
-
-                            <h5>Overview</h5>
-                            <br>
-                            <div class="row">
-                                <div class="column">
-                                    <div class="card">
-                                        <h4>Total Orders</h4>
-                                        <a href="#">
-                                            <h6 class="card-title">144</h6>
-                                        </a>
+                            <div>
+                                <h5>Overview</h5>
+                                <br>
+                                <div class="row">
+                                    <div class="column">
+                                        <div class="card">
+                                            <h4>Total Orders</h4>
+                                            <a href="#">
+                                                <h6 class="card-title">144</h6>
+                                            </a>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="column">
-                                    <div class="card">
-                                        <h4>Total Revenue</h4>
+                                    <div class="column">
+                                        <div class="card">
+                                            <h4>Total Revenue</h4>
 
-                                        <a href="#">
-                                            <h6 class="card-title">$354.00</h6>
-                                        </a>
+                                            <a href="#">
+                                                <h6 class="card-title">$354.00</h6>
+                                            </a>
 
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="column">
-                                    <div class="card">
-                                        <h4>This Month</h4>
-                                        <a href="#">
-                                            <h6 class="card-title">$500.00</h6>
-                                        </a>
+                                    <div class="column">
+                                        <div class="card">
+                                            <h4>This Month</h4>
+                                            <a href="#">
+                                                <h6 class="card-title">$500.00</h6>
+                                            </a>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <!-- <div class="column">
+                                    <!-- <div class="column">
                                     <div class="card">
                                         <h3>Card 4</h3>
                                         <p>Some text</p>
                                         <p>Some text</p>
                                     </div>
                                 </div> -->
+                                </div>
+
                             </div>
-
-
 
 
 

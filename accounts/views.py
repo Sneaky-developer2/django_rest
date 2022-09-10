@@ -1,5 +1,3 @@
-from multiprocessing import context
-import re
 from django.utils.http import urlsafe_base64_decode
 from django.shortcuts import render, redirect
 from accounts.utils import detectUser, send_verification_email

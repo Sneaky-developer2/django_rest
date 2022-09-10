@@ -1,5 +1,3 @@
-
-
 from vendor.models import Vendor
 
 
