@@ -291,13 +291,13 @@ def send_request(request):
         "amount": amount,
         "callback_url": CallbackURL,
         "description": description,
-        "metadata": {"mobile": mobile, "email": email}
+        "metadata": {"mobile": mobile, "email": email}  
     }
     req_header = {"accept": "application/json",
                   "content-type": "application/json'"}
     req = requests.post(url=ZP_API_REQUEST, data=json.dumps(
         req_data), headers=req_header)
-    authority = req.json()['data']['authority']
+    authority = req.json()|(['data']['authority'])
     if len(req.json()['errors']) == 0:
         return redirect(ZP_API_STARTPAY.format(authority=authority))
     else:

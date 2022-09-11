@@ -1,9 +1,12 @@
+from multiprocessing import context
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Vendor
 from .forms import VendorForm
 from accounts.forms import UserProfileForm
 from accounts.models import UserProfile
 from django.contrib import messages
+
+from menu.models import Category
 
 
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -37,3 +40,11 @@ def vprofile(request):
     context = {'profile_form': profile_form,
                'vendor_form': vendor_form, 'profile': profile, 'vendor': vendor}
     return render(request, 'vendor/vprofile.html', context)
+
+
+def menu_builder(request):
+    vendor = Vendor.objects.get(user=request.user)
+    categories = Category.objects.filter(vendor=vendor)
+    context = {'categories': categories}
+
+    return render(request, 'vendor/menu_builder.html', context)

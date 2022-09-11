@@ -27,16 +27,35 @@
 
 }
 
-/* .btn.btn-info {
+.btn {
     padding: 2px 1.75em;
     font-size: 12px;
 
-} */
+}
 
 
 
-.g-blue{ color:#4285F4; }
-.o-red{ color:#DB4437; }
-.o-yellow{ color:#F4B400; }
-.l-green{ color:#0F9D58; }
-.e-red { display:inline-block;transform:rotate(-20deg); }
+
+
+
+
+.g-blue {
+    color: #4285F4;
+}
+
+.o-red {
+    color: #DB4437;
+}
+
+.o-yellow {
+    color: #F4B400;
+}
+
+.l-green {
+    color: #0F9D58;
+}
+
+.e-red {
+    display: inline-block;
+    transform: rotate(-20deg);
+}
