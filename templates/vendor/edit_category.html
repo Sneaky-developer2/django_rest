@@ -25,9 +25,9 @@
                         <div class="user-holder">
                             <h5 class="text-uppercase">Build Your Food Menu</h5>
                             <hr>
-                            <h6>Add New Categories</h6>
+                            <h6>Modify Categories</h6>
 
-                            <form action="{% url 'add_category' %}" method="POST">
+                            <form action="{% url 'edit_category' category.id %}" method="POST">
                                 {% csrf_token %}
                                 <div class="form-fields-set">
                                     <div class="row">
@@ -46,17 +46,17 @@
                                     </div>
                                 </div>
                                 {% for field in form %}
-                                    {% if field.errors  %}
-                                        {% for error in field.errors %}
+                                {% if field.errors %}
+                                {% for error in field.errors %}
 
-                                            <li style="color: red;">{{error}}</li>
+                                <li style="color: red;">{{error}}</li>
 
-                                        {% endfor %}
-                                    {% endif %}
+                                {% endfor %}
+                                {% endif %}
                                 {% endfor %}
 
                                 <button type="submit" class="btn btn-info"><i class="fa fa-plus" aria-hidden="true"></i>
-                                    Create</button>
+                                    Update</button>
                             </form>
                             <br>
 
