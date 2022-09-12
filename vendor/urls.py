@@ -1,3 +1,4 @@
+from tkinter import N
 from django.urls import path, include
 from . import views
 from accounts import views as AccountViews
@@ -16,6 +17,13 @@ urlpatterns = [
          views.edit_category, name='edit_category'),
     path('menu-builder/category/delete/<int:pk>/',
          views.delete_category, name='delete_category'),
+
+
+    # FoodItem crud
+    path('menu-builder/food/add/', views.add_food, name='add_food'),
+    path('menu-builder/food/edit/<int:pk>/',
+         views.edit_food, name='edit_food'),
+
 
 
 

@@ -27,9 +27,9 @@
                             <button class="btn btn-secondary" onclick="history.back()"><i
                                     class="fa fa-angel-left"></i>Back</button>
                             <hr>
-                            <h6>Modify Categories</h6>
+                            <h6>Modify Food Item</h6>
 
-                            <form action="{% url 'edit_category' category.id %}" method="POST">
+                            <form action="{% url 'edit_food' food.id %}" method="POST">
                                 {% csrf_token %}
                                 <div class="form-fields-set">
                                     <div class="row">
@@ -61,10 +61,6 @@
                                     Update</button>
                             </form>
                             <br>
-
-
-
-
                         </div>
                     </div>
                 </div>
