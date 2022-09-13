@@ -153,7 +153,7 @@ def add_food(request):
 def edit_food(request, pk=None):
     food = get_object_or_404(FoodItem, pk=pk)
     if request.method == 'POST':
-        food = FoodItemForm(request.POST, request.FILES, instance=food)
+        form = FoodItemForm(request.POST, request.FILES, instance=food)
         if form.is_valid():
             foodtitle = form.cleaned_data['food_title']
             food = form.save(commit=False)

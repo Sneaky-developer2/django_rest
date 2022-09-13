@@ -38,9 +38,17 @@
                                                                 <li class="gal-img">
                                                                     <div class="drag-list">
                                                                         <div class="item-thumb">
+                                                                            {% if profile.profile_picture.url %}
                                                                             <img class="thumbnail"
                                                                                 src="{{profile.profile_picture.url}}"
                                                                                 alt="Profile Picture ">
+                                                                            {% else %}
+
+                                                                            <img class="thumbnail"
+                                                                                src="{% static 'assets/images/profile-picture-3.PNG' %}"
+                                                                                alt="Profile Picture ">
+
+                                                                            {% endif %}
                                                                         </div>
                                                                         <div class="item-assts">
                                                                             <ul class="list-inline pull-right">
@@ -71,9 +79,17 @@
                                                                 <li class="gal-img">
                                                                     <div class="drag-list">
                                                                         <div class="item-thumb">
+                                                                            {% if profile.cover_photo.url %}
                                                                             <img class="thumbnail"
                                                                                 src="{{profile.cover_photo.url}}"
                                                                                 alt="Cover Photo">
+                                                                            {% else %}
+
+                                                                            <img class="thumbnail"
+                                                                                src="{% static 'assets/images/cover-photo-4.PNG' %}"
+                                                                                alt="Cover Photo">
+
+                                                                            {% endif %}
                                                                         </div>
                                                                         <div class="item-assts">
                                                                             <ul class="list-inline pull-right">
@@ -105,6 +121,7 @@
                                                                 <li class="gal-img">
                                                                     <div class="drag-list">
                                                                         <div class="item-thumb">
+                                                                            
                                                                             <img class="thumbnail"
                                                                                 src="{{vendor.vendor_license.url}}"
                                                                                 alt="vendor">
@@ -131,7 +148,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            
+
                                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                 <div class="field-holder">
                                                     <label>Restaurant name *</label>
@@ -151,7 +168,7 @@
                                                                     style="color:#4285F4;">g</small><small
                                                                     style="color:#0F9D58;">l</small><small
                                                                     style="color:#DB4437;">e</small></small></small>
-                                                        </small>
+                                                    </small>
 
                                                 </div>
                                             </div>

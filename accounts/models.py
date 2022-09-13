@@ -96,7 +96,7 @@ class UserProfile(models.Model):
     profile_picture = models.ImageField(
         upload_to='users/profile_pictures', blank=True, null=True)
     cover_photo = models.ImageField(
-        upload_to='users/cover_photos', blank=True, null=True)
+        upload_to='users/cover_photos', blank=True, null=True )
     address = models.CharField(max_length=250, blank=True, null=True)
     country = models.CharField(max_length=20, blank=True, null=True)
     state = models.CharField(max_length=20, blank=True, null=True)
