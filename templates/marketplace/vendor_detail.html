@@ -33,11 +33,11 @@
 
                                 <span class="restaurant-title">{{vendor.vendor_name}}</span>
                                 <div class="text">
-                                    {% if vendor.user_profile.address  %}
-                                <i class="icon-location"></i>
-                                <p>{{vendor.user_profile.address}}</p>
-                                
-                                {% endif %}
+                                    {% if vendor.user_profile.address %}
+                                    <i class="icon-location"></i>
+                                    <p>{{vendor.user_profile.address}}</p>
+
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
@@ -125,8 +125,7 @@
 
                                             {% for food in category.fooditems.all %}
                                             <li>
-                                                <div class="image-holder"><img
-                                                        src="{{food.image.url}}" alt="">
+                                                <div class="image-holder"><img src="{{food.image.url}}" alt="">
                                                 </div>
                                                 <div class="text-holder">
                                                     <h6>{{food}}</h6>
@@ -141,18 +140,21 @@
                                                     <span class="price">${{food.price}}</span>
                                                     <a href="#"
                                                         class="restaurant-add-menu-btn restaurant-add-menu-btn-0"><i
+                                                            class="icon-delete text-color"></i>
+                                                    <a href="#"
+                                                        class="restaurant-add-menu-btn restaurant-add-menu-btn-0"><i
                                                             class="icon-plus4 text-color"></i>
 
                                                     </a>
-                                                    <span id="add-menu-loader-0"></span>
+
                                                 </div>
                                             </li>
                                             {% endfor %}
                                         </ul>
                                         {% endfor %}
 
-                                        
-                               
+
+
                                     </div>
                                 </div>
                             </div>
