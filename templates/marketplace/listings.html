@@ -6,7 +6,7 @@
 <!-- Main Section Start -->
 <div class="main-section">
     <div class="page-section nopadding cs-nomargin"
-        style="margin-top: 0px;padding-top: 80px;padding-bottom: 60px;margin-bottom: 0px;background: url({% static 'assets/extra-images/banner-img-2.jpg' %}) no-repeat center top / cover;">
+        style="margin-top: 0px;padding-top: 80px;padding-bottom: 60px;margin-bottom: 0px;background: url({% static 'assets/images/cover-photo-4.PNG' %}) no-repeat center top / cover;">
         <div class="page-section nopadding cs-nomargin"
             style="margin-top: 0px;padding-top: 60px;padding-bottom: 10px;margin-bottom: 0px;">
             <div class="container">
@@ -49,7 +49,8 @@
 
                                                 <div class="post-title">
                                                     <h5>
-                                                        <a href="listing-detail.html">{{vendor.vendor_name}}</a>
+                                                        <a
+                                                            href="{% url 'vendor_detail' vendor.vendor_slug %}">{{vendor.vendor_name}}</a>
                                                     </h5>
                                                 </div>
 
@@ -63,7 +64,8 @@
                                             <div class="list-option">
 
 
-                                                <a href="#" class="viewmenu-btn text-color">View Menu</a>
+                                                <a href="{% url 'vendor_detail' vendor.vendor_slug %}"
+                                                    class="viewmenu-btn text-color">View Menu</a>
                                             </div>
                                         </li>
                                         {% endfor %}

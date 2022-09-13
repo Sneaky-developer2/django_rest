@@ -5,7 +5,9 @@ from django.contrib.auth.tokens import default_token_generator
 
 from django.http import HttpResponse
 # import requests
-import json
+# import json
+
+from django.template.defaultfilters import slugify
 
 from vendor.models import Vendor
 from vendor.forms import VendorForm
@@ -113,8 +115,13 @@ def registerVendor(request):
             user.role = User.VENDOR
             user.save()
             vendor = v_form.save(commit=False)
-            user_profile = UserProfile.objects.get(user=user)
             vendor.user = user
+
+            vendor_name = v_form.cleaned_data['vendor_name']
+            vendor.vendor_slug = slugify(vendor_name)+'-'+str(user.id)
+
+            user_profile = UserProfile.objects.get(user=user)
+
             vendor.user_profile = user_profile
             vendor.save()
 
@@ -291,7 +298,7 @@ def reset_password(request):
 #         "amount": amount,
 #         "callback_url": CallbackURL,
 #         "description": description,
-#         "metadata": {"mobile": mobile, "email": email}  
+#         "metadata": {"mobile": mobile, "email": email}
 #     }
 #     req_header = {"accept": "application/json",
 #                   "content-type": "application/json'"}
