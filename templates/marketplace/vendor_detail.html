@@ -4,6 +4,7 @@
 {% block content %}
 
 
+
 <!-- Main Section Start -->
 <div class="main-section">
     <div class="page-section restaurant-detail-image-section"
@@ -138,13 +139,13 @@
                                                 </div>
                                                 <div class="price-holder">
                                                     <span class="price">${{food.price}}</span>
-                                                    <a href="#"
-                                                        class="restaurant-add-menu-btn restaurant-add-menu-btn-0"><i
-                                                            class="icon-delete text-color"></i>
-                                                    <a href="#"
-                                                        class="restaurant-add-menu-btn restaurant-add-menu-btn-0"><i
-                                                            class="icon-plus4 text-color"></i>
+                                                    <a style="margin-right: 28px;" href="" class="decrease_cart"><i
+                                                            class="icon-minus text-color"></a></i>
+                                                    <label id="qty">0</label>
 
+                                                    <a href="#" class="add_to_cart" data-id="{{ food.id }}"
+                                                        data-url="{% url 'add_to_cart' food.id %}">
+                                                        <i class="icon-plus4 text-color"></i>
                                                     </a>
 
                                                 </div>
@@ -152,9 +153,6 @@
                                             {% endfor %}
                                         </ul>
                                         {% endfor %}
-
-
-
                                     </div>
                                 </div>
                             </div>
@@ -165,6 +163,9 @@
         </div>
     </div>
 
+
+
     <!-- Main Section End -->
+
 
     {% endblock %}
