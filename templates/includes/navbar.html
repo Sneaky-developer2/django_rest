@@ -21,7 +21,7 @@
 
                         </div>
                         <div class="main-location">
-                            <ul>
+                            <!-- <ul>
                                 <li class="location-has-children">
 
                                 <li class="location-has-children choose-location">
@@ -105,23 +105,24 @@
                                         </li>l
                                     </ul>
                                 </li>
-                            </ul>
+                            </ul> -->
                         </div>
                     </div>
 
-                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-top: -40px;">
                         <div class="login-option">
 
                             {% if user.is_authenticated %}
-
-                            <a href="">
-                                <i style="font-size: 20px;" class="fa fa-shopping-cart text-danger"></i>
+                            <div style="margin-right: -40px;">
+                            <a href="" >
+                                <i style="font-size: 20px" class="fa fa-shopping-cart text-danger"></i>
                                 <span class="badge badge-warning" id="cart_counter"
-                                    style="border-radius: 50px; position: relative; background-color: rgb(221, 221, 53); color: black; bottom: 10px; left: -5px ; ">{{cart_count}}</span>
+                                    style="border-radius: 50px; position: relative; background-color: rgb(221, 221, 53); color: black; bottom: 10px; left: -5px ;">{{cart_count}}</span>
                             </a>
                             {% endif %}
 
-                            <a href="{% url 'marketplace' %}"><button type="button"
+                            <a  href="{% url 'marketplace' %}"><button
+                                    type="button"
                                     class="btn danger text-uppercase font-weight-bold">Marketplace</button></a>
 
                             {% if user.is_authenticated %}
@@ -147,12 +148,16 @@
                             <a class="get-start-btn" href="{% url 'registerVendor' %}">
                                 Register Restaurant
                             </a>
+                        </div>
 
 
                             {% endif %}
+                            <br>
+                            <br>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </header>
