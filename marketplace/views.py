@@ -1,5 +1,6 @@
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, get_object_or_404
+from .context_processors import get_cart_counter
 
 from vendor.models import Vendor
 from menu.models import Category, FoodItem
@@ -50,12 +51,12 @@ def add_to_cart(request, food_id):
                     # increase the cart quantity
                     chkCart.quantity += 1
                     chkCart.save()
-                    return JsonResponse({'status': 'Success', 'message': 'Increased the card!'})
+                    return JsonResponse({'status': 'Success', 'message': 'Increased the card!', 'cart_counter': get_cart_counter(request), 'qty': chkCart.quantity})
 
                 except:
                     chkCart = Cart.objects.create(
                         user=request.user, fooditem=fooditem, quantity=1)
-                    return JsonResponse({'status': 'Success', 'message': 'Added The Food Card'})
+                    return JsonResponse({'status': 'Success', 'message': 'Added The Food Card', 'cart_counter': get_cart_counter(request), 'qty': chkCart.quantity})
             except:
                 return JsonResponse({'status': 'Failed', 'message': 'This Food does not exist!'})
         else:
