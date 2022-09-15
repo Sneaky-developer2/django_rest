@@ -1,9 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
-
+{% load static %}
 
 
 <!-- Main Section Start -->
@@ -21,22 +19,34 @@
                         <div class="tab-content">
                             <div id="home" class="tab-pane fade in active">
                                 <div class="menu-itam-holder">
+
+                                    <div class="text-center" style="padding: 50px; display: none;" id="empty-cart">
+                                        <h3>Cart is Empty</h3>
+                                        <p>please go to marketplace to add food to your cart</p>
+                                        <a href="{% url 'marketplace' %}"><button style="width: 150px;" type="button"
+                                                class="btn danger text-uppercase font-weight-bold">Marketplace</button></a>
+                                    </div>
+
+
                                     <div id="menu-item-list-6272" class="menu-itam-list">
                                         <ul>
                                             {% if cart_items %}
 
                                             {% for item in cart_items %}
-                                            <li>
+                                            <li id="cart-item-{{item.id}}">
                                                 <div class="image-holder"><img src="{{item.fooditem.image.url}}" alt="">
                                                 </div>
                                                 <div class="text-holder">
                                                     <h6>{{item.fooditem}}</h6>
+
                                                     <span>{{item.fooditem.description}}</span>
+                                                    <a style="background-color: rgb(223, 170, 26); color: black;" href="{% url 'vendor_detail' item.fooditem.vendor.vendor_slug %}"
+                                                        class="badge badge-warning">{{item.fooditem.vendor}}</a>
 
                                                 </div>
                                                 <div class="price-holder">
                                                     <span class="price">${{item.fooditem.price}}</span>
-                                                    <a data-id="{{ item.fooditem.id }}"
+                                                    <a id="{{item.id}}" data-id="{{ item.fooditem.id }}"
                                                         data-url="{% url 'decrease_cart' item.fooditem.id %}"
                                                         style="margin-right: 28px;" href="" class="decrease_cart"><i
                                                             class="icon-minus text-color"></a></i>
@@ -48,6 +58,11 @@
                                                         <i class="icon-plus4 text-color"></i>
                                                     </a>
 
+                                                    <a href="#" class="delete_cart" data-id="{{item.id}}"
+                                                        data-url="{% url 'delete_cart' item.id %}">
+                                                        <i class="icon-delete text-color"></i>
+                                                    </a>
+
                                                 </div>
                                             </li>
                                             {% endfor %}
@@ -55,8 +70,9 @@
                                             <div class="text-center" style="padding: 50px;">
                                                 <h3>Cart is Empty</h3>
                                                 <p>please go to marketplace to add food to your cart</p>
-                                                <a href="{% url 'marketplace' %}"><button style="width: 150px;" type="button"
-                                                    class="btn danger text-uppercase font-weight-bold">Marketplace</button></a>
+                                                <a href="{% url 'marketplace' %}"><button style="width: 150px;"
+                                                        type="button"
+                                                        class="btn danger text-uppercase font-weight-bold">Marketplace</button></a>
                                             </div>
                                             {% endif %}
                                         </ul>
@@ -93,21 +109,21 @@
                                                 Subtotal
                                                 <span class="price" style="float: right;">
                                                     <span class="currency">$</span>
-                                                    <span id="subtotal">0</span>
+                                                    <span id="subtotal">{{subtotal}}</span>
                                                 </span>
                                             </li>
                                             <li style="list-style-type: none;">
                                                 Tax
                                                 <span class="price" style="float: right;">
                                                     <span class="currency">$</span>
-                                                    <span id="subtotal">0</span>
+                                                    <span id="tax">{{tax}}</span>
                                                 </span>
                                             </li>
                                             <li style="list-style-type: none; font-weight: 600;">
                                                 TOTAL
                                                 <span class="price" style="float: right;">
                                                     <span class="currency">$</span>
-                                                    <span id="subtotal">0</span>
+                                                    <span id="grand_total">{{grand_total}}</span>
                                                 </span>
                                             </li>
                                         </ul>
