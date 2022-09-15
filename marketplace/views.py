@@ -1,3 +1,4 @@
+from multiprocessing import context
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, get_object_or_404
 from .context_processors import get_cart_counter
@@ -94,3 +95,9 @@ def decrease_cart(request, food_id):
             return JsonResponse({'status': 'Failed', 'message': 'invalid request!'})
     else:
         return JsonResponse({'status': 'login_required', 'message': 'Please login first!'})
+
+
+def cart(request):
+    cart_items = Cart.objects.filter(user=request.user)
+    context = {'cart_items': cart_items}
+    return render(request, 'marketplace/cart.html', context)
