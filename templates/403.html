@@ -2,8 +2,30 @@
 {% load static %}
 
 {% block content %}
-<h1>403 Forbidden Error</h1>
 
-<p>you are not authorized to view this page!!!</p>
+<!-- 404 Page Start -->
+<div class="page-section nopadding cs-nomargin">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="page-not-found">
+                    <div class="cs-text">
+                        <span class="cs-error">403</span>
+                        <span>Forbidden Error</span>
+                        <p>you are not authorized to view this page!!!</p>
+                    </div>
+                    <button class="btn btn-secondary" onclick="history.back()"><i
+                        class="fa fa-angel-left"></i>Back</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 404 Page End -->
+
+<!-- <h1></h1>
+
+<p></p> -->
 
 {% endblock %}

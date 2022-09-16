@@ -124,3 +124,6 @@
     background: #e7e7e7;
 }
 
+.main-search.fancy .field-holder input[type="text"] {
+    color: black !important;
+}
