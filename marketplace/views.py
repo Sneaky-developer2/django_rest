@@ -1,4 +1,3 @@
-
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, get_object_or_404
 from .context_processors import get_cart_amounts, get_cart_counter
@@ -121,3 +120,8 @@ def delete_cart(request, cart_id):
 
         else:
             return JsonResponse({'status': 'Failed', 'message': 'invalid request!'})
+
+
+
+def search(request):
+    return HttpResponse('Search Page')
