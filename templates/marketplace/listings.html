@@ -59,6 +59,14 @@
                                                         class="text-muted">{{vendor.user_profile.address}}</small></span>
                                                 {% endif %}
 
+                                                {% if source_location %}
+                                                <br>
+                                                <span><small>
+                                                        <b>{{vendors.ksm}}km</b> away from
+                                                        {{source_location}}
+                                                    </small></span>
+                                                {% endif %}
+
 
                                             </div>
                                             <div class="list-option">

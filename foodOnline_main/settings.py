@@ -170,6 +170,9 @@ EMAIL_HOST_PASSWORD = 'wxplsydrakdvwswf'
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'foodOnline Marketplace <noob1384noob1384@gmail.com>'
 
+GOOGLE_API_KEY = 'AIzaSyC4yTudrg9pTcB2khAgrbCMBfVvbviOhVU'
+
+
 
 os.environ['PATH'] = os.path.join(
     BASE_DIR, 'myproject\Lib\site-packages\osgeo') + ';' + os.environ['PATH']
