@@ -1,2 +1,2 @@
-# django_rest
+#django_rest
 my second django project

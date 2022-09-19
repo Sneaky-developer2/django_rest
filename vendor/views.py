@@ -1,8 +1,9 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.http import HttpResponse
 
 from menu.forms import CategoryForm, FoodItemForm
-from .models import Vendor
-from .forms import VendorForm
+from .models import Vendor, OpeningHour
+from .forms import VendorForm, OpeningHourForm
 from accounts.forms import UserProfileForm
 from accounts.models import UserProfile
 from django.contrib import messages
@@ -77,7 +78,7 @@ def add_category(request):
         if form.is_valid():
             category_name = form.cleaned_data['category_name']
             category = form.save(commit=False)
-            
+
             category.vendor = get_vendor(request)
             category.save()
             category.slug = slugify(category_name)+'-'+str(category.id)
@@ -146,7 +147,8 @@ def add_food(request):
             pass
     else:
         form = FoodItemForm()
-        form.fields['category'].queryset = Category.objects.filter(vendor=get_vendor(request))
+        form.fields['category'].queryset = Category.objects.filter(
+            vendor=get_vendor(request))
     context = {'form': form}
 
     return render(request, 'vendor/add_food.html', context)
@@ -170,7 +172,8 @@ def edit_food(request, pk=None):
             pass
     else:
         form = FoodItemForm(instance=food)
-        form.fields['category'].queryset = Category.objects.filter(vendor=get_vendor(request))
+        form.fields['category'].queryset = Category.objects.filter(
+            vendor=get_vendor(request))
 
     context = {'form': form, 'food': food}
 
@@ -184,3 +187,23 @@ def delete_food(request, pk=None):
     food.delete()
     messages.success(request, 'Food Item has been deleted successfully')
     return redirect('fooditems_by_category', food.category.id)
+
+
+@login_required(login_url='login')
+@user_passes_test(check_role_vendor)
+def opening_hours(request):
+    opening_hours = OpeningHour.objects.filter(vendor=get_vendor(request))
+    form = OpeningHourForm()
+
+
+    context = {'form' : form, 'opening_hours' : opening_hours}
+    return render(request, 'vendor/opening_hours.html', context)
+
+
+
+def add_opening_hours(request):
+    return HttpResponse('Add Opening Hours')
+
+
+
+
