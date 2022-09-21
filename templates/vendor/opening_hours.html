@@ -6,6 +6,46 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>  -->
 
 
+<style>
+    .styled-table {
+        border-collapse: collapse;
+        margin: 25px 0;
+        font-size: 0.9em;
+        font-family: sans-serif;
+        min-width: 400px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .styled-table thead tr {
+        background-color: #009879;
+        color: #ffffff;
+        text-align: left;
+    }
+
+    .styled-table th,
+    .styled-table td {
+        padding: 12px 15px;
+    }
+
+    .styled-table tbody tr {
+        border-bottom: 1px solid #dddddd;
+    }
+
+    .styled-table tbody tr:nth-of-type(even) {
+        background-color: #f3f3f3;
+    }
+
+    .styled-table tbody tr:last-of-type {
+        border-bottom: 2px solid #009879;
+    }
+
+    .styled-table tbody tr.active-row {
+        font-weight: bold;
+        color: #009879;
+    }
+</style>
+
+
 <link rel="stylesheet" href="{% static 'assets/css/custom.css' %}">
 <!-- Main Section Start -->
 <div class="main-section">
@@ -23,11 +63,18 @@
                         <div class="user-holder">
                             <h5 class="text-uppercase">Opening Hours</h5>
                             <hr>
-                            <table class="table opening_hours" style="width: 500px;">
+                            <table class="opening_hours styled-table" style="width: 500px;">
                                 <tbody>
+                                    <tr style="background-color: #009879;">
+                                        <td style="color: white;">day</td>
+                                        <td style="color: white;">hours</td>
+                                        <td style="color: white;">Delete </td>
+
+                                    </tr>
                                     {% for hour in opening_hours %}
+
                                     <tr id="hour-{{hour.id}}">
-                                        <td><b>{{hour}}</b></td>
+                                        <td class=".active-row"><b>{{hour}}</b></td>
                                         <td>{% if hour.is_closed %} Closed{% else %} {{ hour.from_hour }} -
                                             {{ hour.to_hour }} {% endif %}</td>
                                         <td><a href="#" class="remove_hour"
