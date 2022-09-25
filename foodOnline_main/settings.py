@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'marketplace',
     'django.contrib.gis',
     'customers',
+    'orders'
 ]
 
 MIDDLEWARE = [
@@ -173,7 +174,6 @@ EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'foodOnline Marketplace <noob1384noob1384@gmail.com>'
 
 GOOGLE_API_KEY = 'AIzaSyC4yTudrg9pTcB2khAgrbCMBfVvbviOhVU'
-
 
 
 os.environ['PATH'] = os.path.join(
