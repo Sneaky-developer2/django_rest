@@ -2,7 +2,7 @@
 
 
 <div class="page-section restaurant-detail-image-section"
-    style=" background: url({% static 'assets/extra-images/cover-photo01.jpg' %}) no-repeat scroll 0 0 / cover;">
+    style=" background: url({% if user_profile.cover_photo  %} {{ user_profile.cover_photo.url }} {% else %} {% static 'assets/images/cover-photo-4.PNG' %} {% endif %}) no-repeat scroll 0 0 / cover;">
     <!-- Container Start -->
     <div class="container">
         <!-- Row Start -->
@@ -13,15 +13,19 @@
                     <div class="company-info">
                         <div class="img-holder">
                             <figure>
-                                <img src="{% static 'assets/extra-images/listing-logo18.png' %}" alt="">
+                                {% if user_profile.profile_picture %}
+                                <img src="{{ user_profile.profile_picture.url }}" alt="Profile Picture">
+                                {% else %}
+                                <img src="{% static 'assets/images/profile-picture-3.PNG' %}" alt="Profile Picture">
+                                {% endif %}
                             </figure>
                         </div>
 
                         <div class="text-holder">
-                            <span class="restaurant-title">Jalal Jamal</span>
+                            <span class="restaurant-title">{{user.first_name}} {{user.last_name}}</span>
                             <div class="text">
                                 <i class="icon-phone"></i>
-                                <p>+98-9050813873</p>
+                                <p>{{user.phone_number}}</p>
                             </div>
                         </div>
                     </div>
