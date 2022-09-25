@@ -1,16 +1,17 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 
-from accounts.forms import UserProfileForm
-from accounts.models import User
+from accounts.forms import UserInfoForm, UserProfileForm
+from accounts.models import User, UserProfile
 
 # Create your views here.
 
+
 @login_required(login_url='login')
 def cprofile(request):
-    profile_form = UserProfileForm()
+    profile = get_object_or_404(UserProfile, user=request.user)
+    profile_form = UserProfileForm(instance=profile)
+    user_form = UserInfoForm(instance=request.user)
 
-    context = {}
+    context = {'profile_form': profile_form, 'user_form': user_form}
     return render(request, 'customers/cprofile.html', context)
-
-
