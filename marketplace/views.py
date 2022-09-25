@@ -114,7 +114,6 @@ def decrease_cart(request, food_id):
                     return JsonResponse({'status': 'Success', 'cart_counter': get_cart_counter(request), 'qty': chkCart.quantity, 'cart_amount': get_cart_amounts(request)})
 
                 except:
-
                     return JsonResponse({'status': 'Failed', 'message': 'you do not have the item in your Cart'})
             except:
                 return JsonResponse({'status': 'Failed', 'message': 'This Food does not exist!'})
