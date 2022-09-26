@@ -1,4 +1,5 @@
 import simplejson as json
+
 from django.shortcuts import render, redirect
 from marketplace.context_processors import get_cart_amounts
 
@@ -47,3 +48,5 @@ def place_order(request):
         else:
             print(form.errors)
     return render(request, 'orders/place_order.html')
+
+

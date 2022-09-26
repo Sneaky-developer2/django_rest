@@ -20,7 +20,7 @@
                             <div id="home" class="tab-pane fade in active">
                                 <div class="menu-itam-holder">
                                     <div id="menu-item-list-6272" class="menu-itam-list">
-                                        
+
 
                                     </div>
                                 </div>
@@ -71,8 +71,11 @@
                                             </li>
                                             <br>
                                             <!-- Check Out Button -->
-                                            <div id="paypal-button-container">
-                                                
+                                            <div>
+                                                <a href="{% url 'go_to_gateway_view' %}">
+                                                    <button type="submit" href="#"
+                                                        style="width: 300px;"
+                                                        class="btn btn-danger w-100 p-2 mt-3">CheckOut</button></a>
                                             </div>
                                         </ul>
                                         <br>
@@ -86,4 +89,5 @@
         </div>
     </div>
     <!-- Main Section End -->
+
     {% endblock %}
