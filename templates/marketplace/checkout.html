@@ -3,6 +3,25 @@
 {% block content %}
 {% load static %}
 
+<style>
+    .payment-method [type=radio] {
+        position: absolute;
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .payment-method [type=radio]+img {
+        cursor: pointer;
+        padding: 5px;
+    }
+
+    .payment-method [type=radio]:checked+img {
+        outline: 2px solid #ff0000;
+
+
+    }
+</style>
 
 <!-- Main Section Start -->
 <div class="main-section" style="padding-top: 35px;">
@@ -75,7 +94,6 @@
 
                                     <div id="menu-item-list-6272" class="menu-itam-list">
                                         <ul>
-                                            {% if cart_items %}
 
                                             {% for item in cart_items %}
                                             <li id="cart-item-{{item.id}}">
@@ -102,15 +120,7 @@
                                                 </div>
                                             </li>
                                             {% endfor %}
-                                            {% else %}
-                                            <div class="text-center" style="padding: 50px;">
-                                                <h3>Cart is Empty</h3>
-                                                <p>please go to marketplace to add food to your cart</p>
-                                                <a href="{% url 'marketplace' %}"><button style="width: 150px;"
-                                                        type="button"
-                                                        class="btn danger text-uppercase font-weight-bold">Marketplace</button></a>
-                                            </div>
-                                            {% endif %}
+
                                         </ul>
 
                                     </div>
@@ -144,10 +154,33 @@
                                                     <span id="grand_total">{{grand_total}}</span>
                                                 </span>
                                             </li>
+                                            <h5>Select Payment Method</h5>
+
+                                            <div class="payment-method">
+                                                <label>
+                                                    <input type="radio" name="payment_method" value="Paypal">
+                                                    <img style="width: 100px;"
+                                                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/PayPal_logo.svg/527px-PayPal_logo.svg.png"
+                                                        alt="Paypal">
+                                                </label>
+                                                &emsp;
+
+                                                <label>
+                                                    <input type="radio" name="payment_method" value="ZarinPal">
+                                                    <img style="width: 100px;"
+                                                        src="{% static 'assets/images/zarinpal-logo-1.png' %}"
+                                                        alt="ZarinPal">
+                                                </label>
+                                            </div>
+                                            <span id="payment-method-error" class="text-danger">
+
+                                            </span>
                                             <br>
-                                            <button type="submit" href="#" style="width: 500px;"
-                                                class="btn btn-danger w-100 p-2 mt-3">Place Order</button>
+                                            <button onclick="return payMethodConfirm();" type="submit" href="#"
+                                                style="width: 500px;" class="btn btn-danger w-100 p-2 mt-3">Place
+                                                Order</button>
                                             </form>
+
 
                                         </ul>
                                     </div>
@@ -161,4 +194,32 @@
         </div>
     </div>
     <!-- Main Section End -->
+
+    <script>
+        function payMethodConfirm() {
+            var payMethod = $("input[name='payment_method']:checked").val()
+            if (!payMethod) {
+                $('#payment-method-error').html("Select Payment Method")
+                return false
+
+            }
+            else {
+                var conf = confirm('You have selected ' + payMethod + 'as your Payment Method.\nClick "ok" to continue')
+                if (conf == true) {
+                    return true
+
+                }
+                else {
+                    return false
+                }
+
+            }
+
+        }
+        $("input[name='payment_method']").on('change', function () {
+            $('#payment-method-error').html("")
+        })
+    </script>
+
+
     {% endblock %}
