@@ -23,14 +23,45 @@
 
                                     <div id="menu-item-list-6272" class="menu-itam-list">
 
+                                        <form action="" method="POST">
+                                            {% csrf_token %}
 
+                                            <div class="row">
+                                                <div class="form-group col-md-6 col-sm-12 col-lg-6">
+                                                    First Name: {{ form.first_name }}
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-12 col-lg-6">
+                                                    Last Name: {{ form.last_name }}
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-12 col-lg-6">
+                                                    Phone Number: {{ form.phone }}
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-12 col-lg-6">
+                                                    Email Address: {{ form.email }}
+                                                </div>
+                                                <div class="form-group col-md-12 col-sm-12 col-lg-12">
+                                                    Address: {{ form.address }}
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-12 col-lg-6">
+                                                    Country: {{ form.country }}
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-12 col-lg-6">
+                                                    State: {{ form.state }}
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-12 col-lg-6">
+                                                    City: {{ form.city }}
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-12 col-lg-6">
+                                                    Pin Code: {{ form.pin_code }}
+                                                </div>
+                                            </div>
+                                            <br>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <!-- your order -->
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                     <div class="tabs-holder horizontal">
@@ -42,6 +73,47 @@
                             <div id="home" class="tab-pane fade in active">
                                 <div class="menu-itam-holder">
 
+                                    <div id="menu-item-list-6272" class="menu-itam-list">
+                                        <ul>
+                                            {% if cart_items %}
+
+                                            {% for item in cart_items %}
+                                            <li id="cart-item-{{item.id}}">
+                                                <div class="image-holder"><img src="{{item.fooditem.image.url}}" alt="">
+                                                </div>
+                                                <div class="text-holder">
+                                                    <h6>{{item.fooditem}}</h6>
+
+                                                    <span>{{item.fooditem.description}}</span>
+                                                    <a style="background-color: rgb(223, 170, 26); color: black;"
+                                                        href="{% url 'vendor_detail' item.fooditem.vendor.vendor_slug %}"
+                                                        class="badge badge-warning">{{item.fooditem.vendor}}</a>
+
+                                                </div>
+                                                <div class="price-holder">
+                                                    <div class="quantity"
+                                                        style="display: inline-block; position: absolute; top: 50%;transform:translate(-200%);margin-top: -2px ;">
+                                                        <span>{{item.quantity}} QTY</span>
+                                                    </div>
+
+                                                    <span class="price">${{item.fooditem.price}}</span>
+
+                                                    <label id="qty-{{item.fooditem.id}}"></label>
+                                                </div>
+                                            </li>
+                                            {% endfor %}
+                                            {% else %}
+                                            <div class="text-center" style="padding: 50px;">
+                                                <h3>Cart is Empty</h3>
+                                                <p>please go to marketplace to add food to your cart</p>
+                                                <a href="{% url 'marketplace' %}"><button style="width: 150px;"
+                                                        type="button"
+                                                        class="btn danger text-uppercase font-weight-bold">Marketplace</button></a>
+                                            </div>
+                                            {% endif %}
+                                        </ul>
+
+                                    </div>
                                     <div>
                                         <ul>
                                             <li style="list-style-type: none;">
@@ -73,11 +145,13 @@
                                                 </span>
                                             </li>
                                             <br>
-                                        
-                                        </ul>
-                                        
+                                            <button type="submit" href="#" style="width: 500px;"
+                                                class="btn btn-danger w-100 p-2 mt-3">Place Order</button>
+                                            </form>
 
+                                        </ul>
                                     </div>
+                                    <br>
                                 </div>
                             </div>
                         </div>

@@ -1,19 +1,20 @@
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
-from .context_processors import get_cart_amounts, get_cart_counter
-
-from vendor.models import OpeningHour, Vendor
-from menu.models import Category, FoodItem
-from django.db.models import Prefetch
-from .models import Cart
-from django.contrib.auth.decorators import login_required
-from django.db.models import Q
-
 from django.contrib.gis.geos import GEOSGeometry
 from django.contrib.gis.measure import D
 from django.contrib.gis.db.models.functions import Distance
+from .context_processors import get_cart_amounts, get_cart_counter
+from django.db.models import Prefetch
 
+from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 from datetime import date, datetime
+
+from accounts.models import UserProfile
+from orders.forms import OrderForm
+from vendor.models import OpeningHour, Vendor
+from menu.models import Category, FoodItem
+from .models import Cart
 
 
 # Create your views here.
@@ -47,14 +48,12 @@ def vendor_detail(request, vendor_slug):
     opening_hours = OpeningHour.objects.filter(
         vendor=vendor).order_by('day', '-from_hour')
 
-
     # Check current day's opening hours.
     today_date = date.today()
     today = today_date.isoweekday()
 
     current_opening_hours = OpeningHour.objects.filter(
         vendor=vendor, day=today)
-
 
     if request.user.is_authenticated:
         cart_items = Cart.objects.filter(user=request.user)
@@ -182,9 +181,31 @@ def search(request):
 
         return render(request, 'marketplace/listings.html', context)
 
+
+@login_required(login_url='login')
 def checkout(request):
-    return render(request, 'marketplace/checkout.html')
+    cart_items = Cart.objects.filter(user=request.user).order_by('created_at')
+    cart_count = cart_items.count()
+
+    if cart_count <= 0:
+        return redirect('marketplace')
+
+    user_profile = UserProfile.objects.get(user=request.user)
+    default_values = {
+        'first_name': request.user.first_name,
+        'last_name': request.user.last_name,
+        'phone': request.user.phone_number,
+        'email': request.user.email,
+        'address': user_profile.address,
+        'country': user_profile.country,
+        'state': user_profile.state,
+        'city': user_profile.city,
+        'pin_code': user_profile.pin_code,
 
 
 
+    }
+    form = OrderForm(initial=default_values)
 
+    context = {'form': form, 'cart_items': cart_items, }
+    return render(request, 'marketplace/checkout.html', context)
