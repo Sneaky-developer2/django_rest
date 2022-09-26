@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from marketplace.context_processors import get_cart_amounts
 
 from marketplace.models import Cart
+from orders.utils import generate_order_number
 from .forms import OrderForm
 from .models import Order
 
@@ -38,9 +39,9 @@ def place_order(request):
             order.total = grand_total
             order.tax_data = json.dumps(tax_data)
             order.total_tax = total_tax
-            order.payment_method = request.POST['payment_method']
-            order.order_number = '123'
+            order.payment_method = request.POST['payment_method']    
             order.save()
+            order.order_number = generate_order_number(order.id)
             return redirect('place_order')
 
         else:
