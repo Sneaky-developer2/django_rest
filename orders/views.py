@@ -39,7 +39,7 @@ def place_order(request):
             order.total = grand_total
             order.tax_data = json.dumps(tax_data)
             order.total_tax = total_tax
-            order.payment_method = request.POST['payment_method']    
+            order.payment_method = request.POST['payment_method']
             order.save()
             order.order_number = generate_order_number(order.id)
             return redirect('place_order')
