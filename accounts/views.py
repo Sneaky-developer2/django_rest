@@ -1,3 +1,4 @@
+from time import timezone
 from django.utils.http import urlsafe_base64_decode
 from django.shortcuts import render, redirect
 from accounts.utils import detectUser, send_verification_email
@@ -284,7 +285,7 @@ def reset_password(request):
 
 MERCHANT = 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX'
 ZP_API_REQUEST = "https://sandbox.zarinpal.com/pg/services/WebGate/wsdl"
-ZP_API_VERIFY = "https://localhost:8000/api/zarinpal/verify/"
+ZP_API_VERIFY = "http://localhost:8000/verify/"
 ZP_API_STARTPAY = "https://sandbox.zarinpal.com/pg/StartPay/"
 
 client = Client(ZP_API_REQUEST)
@@ -298,18 +299,18 @@ CallbackURL = 'http://localhost:8000/verify/'
 
 
 def send_request(request):
-    req_data = {
-        "merchant_id": MERCHANT,
-        "amount": amount,
-        "callback_url": CallbackURL,
-        "description": description,
-        "metadata": {"mobile": mobile, "email": email}
-    }
+    comment = "تراکنش"
+    CallbackURL = ZP_API_VERIFY
+    email = 'email@example.com'
+    phone = mobile
+    
+
     req_header = {"accept": "application/json",
                   "content-type": "application/json'"}
-    req = requests.post(url=ZP_API_REQUEST, data=json.dumps(
-        req_data), headers=req_header)
-    authority = req.json() | (['data']['authority'])
+    req = client.service.PaymentRequest(
+        MERCHANT, amount, comment, email, phone, CallbackURL)
+    
+    authority = req.json()
     if len(req.json()['errors']) == 0:
         return redirect(ZP_API_STARTPAY.format(authority=authority))
     else:
