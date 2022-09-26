@@ -18,8 +18,10 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 
 from django.core.exceptions import PermissionDenied
 
-
+from zeep import Client
 # Restrict the vendor from accessing the customer page
+
+
 def check_role_vendor(user):
     if user.role == 1:
         return True
@@ -281,12 +283,13 @@ def reset_password(request):
 
 
 MERCHANT = 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX'
-ZP_API_REQUEST = "https://api.zarinpal.com/pg/v4/payment/request.json"
-ZP_API_VERIFY = "https://api.zarinpal.com/pg/v4/payment/verify.json"
-ZP_API_STARTPAY = "https://www.zarinpal.com/pg/StartPay/{authority}"
+ZP_API_REQUEST = "https://sandbox.zarinpal.com/pg/services/WebGate/wsdl"
+ZP_API_VERIFY = "https://localhost:8000/api/zarinpal/verify/"
+ZP_API_STARTPAY = "https://sandbox.zarinpal.com/pg/StartPay/"
 
+client = Client(ZP_API_REQUEST)
 
-amount = 11000  # Rial / Required
+amount = 111000  # Rial / Required
 description = "توضیحات مربوط به تراکنش را در این قسمت وارد کنید"  # Required
 email = 'email@example.com'  # Optional
 mobile = '09123456789'  # Optional
@@ -306,7 +309,7 @@ def send_request(request):
                   "content-type": "application/json'"}
     req = requests.post(url=ZP_API_REQUEST, data=json.dumps(
         req_data), headers=req_header)
-    authority = req.json()|(['data']['authority'])
+    authority = req.json() | (['data']['authority'])
     if len(req.json()['errors']) == 0:
         return redirect(ZP_API_STARTPAY.format(authority=authority))
     else:
