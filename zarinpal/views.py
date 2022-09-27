@@ -40,9 +40,9 @@ def pay(request: HttpRequest):
     }
     form = OrderForm(initial=default_values)
 
-    amount = request.POST.get('amount', instance=form)
+    amount = request.POST.get('amount')  
     description = request.POST.get('description')
-    email = request.POST.get('email')
+    email = request.POST.get('email', form.email)
     mobile = request.POST.get('mobile')
 
     try:
