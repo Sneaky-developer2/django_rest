@@ -40,31 +40,30 @@
         }
     </style>
     <!-- Custom styles for this template -->
-    <link href="{% static 'css/floating-labels.css' %}" rel="stylesheet">
+    <link href="{% static 'zarinpal/css/floating-labels.css' %}" rel="stylesheet">
 </head>
 
 <body>
     <form class="form-signin" action="pay" method="POST">
         {% csrf_token %}
         <div class="text-center mb-4">
-            <img class="mb-4" src="{% static 'images/zarinpal.png' %}" alt="" width="300" height="72">
+            <img class="mb-4" src="{% static 'zarinpal/images/zarinpal.png' %}" alt="" width="300" height="72">
             <!-- <h1 class="h3 mb-3 font-weight-normal">پرداختی امن</h1>
             <p> با درگاه بانکی زرین پال </p> -->
         </div>
 
         <div class="form-label-group">
-            <input name="email" type="email" id="inputEmail" class="form-control text-right" placeholder="ایمیل">
+            <input name="email" type="email" id="inputEmail" class="form-control text-right" placeholder="ایمیل" >
             <label for="inputEmail" class="text-right">ایمیل</label>
         </div>
 
         <div class="form-label-group">
-            <input name="mobile" type="text" id="inputMobile" class="form-control text-right" placeholder="تلفن همراه">
+            <input name="mobile" type="text" id="inputMobile" class="form-control text-right" placeholder="تلفن همراه" >
             <label for="inputMobile" class="text-right">تلفن همراه</label>
         </div>
 
         <div class="form-label-group">
-            <input name="amount" type="text" id="inputCash" class="form-control text-right" placeholder="مبلغ (تومان)"
-                required>
+            <input name="amount" type="text" id="inputCash" class="form-control text-right" placeholder="مبلغ (تومان)" required>
             <label for="inputCash" class="text-right">مبلغ (تومان)</label>
         </div>
 
@@ -74,9 +73,9 @@
         </div>
 
         <button class="btn btn-lg btn-success btn-block" type="submit">پرداخت</button>
+        <p class="mt-5 mb-3 text-muted text-center">&#127279; <a href="https://github.com/mthri"> mthri </a></p>
     </form>
 
 </body>
-
 
 </html>

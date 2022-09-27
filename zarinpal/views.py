@@ -1,6 +1,10 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpRequest
 from django.core.exceptions import ObjectDoesNotExist
+from accounts.models import UserProfile
+
+from orders.forms import OrderForm
+from orders.models import Order
 
 from .models import Transaction
 from .forms import TransactionForm
@@ -13,7 +17,7 @@ from .zp import Zarinpal, ZarinpalError
  if you want use in your product, remove sandbox and replace real mercand and callback url then use it!
 '''
 zarin_pal = Zarinpal('XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX',
-                     'http://127.0.0.1:8000/verify',
+                     'http://127.0.0.1:8000/zarinpal/verify',
                      sandbox=True)
 
 
@@ -22,8 +26,21 @@ def index(request):
 
 
 def pay(request: HttpRequest):
+    user_profile = UserProfile.objects.get(user=request.user)
+    default_values = {
+        'first_name': request.user.first_name,
+        'last_name': request.user.last_name,
+        'mobile': request.user.phone_number,
+        'email': request.user.email,
+        'address': user_profile.address,
+        'country': user_profile.country,
+        'state': user_profile.state,
+        'city': user_profile.city,
+        'pin_code': user_profile.pin_code,
+    }
+    form = OrderForm(initial=default_values)
 
-    amount = request.POST.get('amount')
+    amount = request.POST.get('amount', instance=form)
     description = request.POST.get('description')
     email = request.POST.get('email')
     mobile = request.POST.get('mobile')

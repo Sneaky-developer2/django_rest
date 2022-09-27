@@ -6,11 +6,11 @@ class Zarinpal():
     WSDL = 'https://www.zarinpal.com/pg/services/WebGate/wsdl'
     WEB_GATE = 'https://www.zarinpal.com/pg/StartPay/'
     MERCHANT_ID: str
-    CALLBACK_URL = ''
+    CALLBACK_URL = 'https://127.0.0.1:8000'
 
     __zarinpal_client: Client
 
-    def __init__(self, merchant_id: str, callback_url: str, wsdl_address: str = None, sandbox=False):
+    def __init__(self, merchant_id: str, callback_url = CALLBACK_URL, wsdl_address: str = None, sandbox=True):
 
         # if you want to use a diffrent WSDL address
         if wsdl_address is not None:
