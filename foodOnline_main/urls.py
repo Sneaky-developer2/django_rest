@@ -39,6 +39,9 @@ urlpatterns = [
 
     # order
     path('orders/', include('orders.urls')),
+
+    # zarinpal
+    path('zarinpal/', include('zarinpal.urls'))
     
 
     
