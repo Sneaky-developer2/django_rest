@@ -38,11 +38,11 @@ def pay(request: HttpRequest):
         'city': user_profile.city,
         'pin_code': user_profile.pin_code,
     }
-    form = OrderForm(initial=default_values)
+    forms = OrderForm()
 
-    amount = request.POST.get('amount')  
+    amount = request.POST.get('amount')
     description = request.POST.get('description')
-    email = request.POST.get('email', form.email)
+    email = request.POST.get('email', instance=forms.email)
     mobile = request.POST.get('mobile')
 
     try:
