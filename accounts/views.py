@@ -5,8 +5,9 @@ from accounts.utils import detectUser, send_verification_email
 from django.contrib.auth.tokens import default_token_generator
 
 from django.http import HttpResponse
-import requests
-import json
+# import requests
+# import json
+# from zeep import Client
 
 from django.template.defaultfilters import slugify
 
@@ -19,7 +20,6 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 
 from django.core.exceptions import PermissionDenied
 
-from zeep import Client
 # Restrict the vendor from accessing the customer page
 
 
@@ -283,72 +283,71 @@ def reset_password(request):
     return render(request, 'accounts/reset_password.html')
 
 
-MERCHANT = 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX'
-ZP_API_REQUEST = "https://sandbox.zarinpal.com/pg/services/WebGate/wsdl"
-ZP_API_VERIFY = "http://localhost:8000/verify/"
-ZP_API_STARTPAY = "https://sandbox.zarinpal.com/pg/StartPay/"
+# MERCHANT = 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX'
+# ZP_API_REQUEST = "https://sandbox.zarinpal.com/pg/services/WebGate/wsdl"
+# ZP_API_VERIFY = "http://localhost:8000/verify/"
+# ZP_API_STARTPAY = "https://sandbox.zarinpal.com/pg/StartPay/"
 
-client = Client(ZP_API_REQUEST)
+# client = Client(ZP_API_REQUEST)
 
-amount = 111000  # Rial / Required
-description = "توضیحات مربوط به تراکنش را در این قسمت وارد کنید"  # Required
-email = 'email@example.com'  # Optional
-mobile = '09123456789'  # Optional
-# Important: need to edit for realy server.
-CallbackURL = 'http://localhost:8000/verify/'
-
-
-def send_request(request):
-    comment = "تراکنش"
-    CallbackURL = ZP_API_VERIFY
-    email = 'email@example.com'
-    phone = mobile
-    
-
-    req_header = {"accept": "application/json",
-                  "content-type": "application/json'"}
-    req = client.service.PaymentRequest(
-        MERCHANT, amount, comment, email, phone, CallbackURL)
-    
-    authority = req.json()
-    if len(req.json()['errors']) == 0:
-        return redirect(ZP_API_STARTPAY.format(authority=authority))
-    else:
-        e_code = req.json()['errors']['code']
-        e_message = req.json()['errors']['message']
-        return HttpResponse(f"Error code: {e_code}, Error Message: {e_message}")
+# amount = 111000  # Rial / Required
+# description = "توضیحات مربوط به تراکنش را در این قسمت وارد کنید"  # Required
+# email = 'email@example.com'  # Optional
+# mobile = '09123456789'  # Optional
+# # Important: need to edit for realy server.
+# CallbackURL = 'http://localhost:8000/verify/'
 
 
-def verify(request):
-    t_status = request.GET.get('Status')
-    t_authority = request.GET['Authority']
-    if request.GET.get('Status') == 'OK':
-        req_header = {"accept": "application/json",
-                      "content-type": "application/json'"}
-        req_data = {
-            "merchant_id": MERCHANT,
-            "amount": amount,
-            "authority": t_authority
-        }
-        req = requests.post(url=ZP_API_VERIFY, data=json.dumps(
-            req_data), headers=req_header)
-        if len(req.json()['errors']) == 0:
-            t_status = req.json()['data']['code']
-            if t_status == 100:
-                return HttpResponse('Transaction success.\nRefID: ' + str(
-                    req.json()['data']['ref_id']
-                ))
-            elif t_status == 101:
-                return HttpResponse('Transaction submitted : ' + str(
-                    req.json()['data']['message']
-                ))
-            else:
-                return HttpResponse('Transaction failed.\nStatus: ' + str(
-                    req.json()['data']['message']
-                ))
-        else:
-            e_code = req.json()['errors']['code']
-            e_message = req.json()['errors']['message']
-            return HttpResponse(f"Error code: {e_code}, Error Message: {e_message}")
-    else:
-        return HttpResponse('Transaction failed or canceled by user')
+# def send_request(request):
+#     comment = "تراکنش"
+#     CallbackURL = ZP_API_VERIFY
+#     email = 'email@example.com'
+#     phone = mobile
+
+#     req_header = {"accept": "application/json",
+#                   "content-type": "application/json'"}
+#     req = client.service.PaymentRequest(
+#         MERCHANT, amount, comment, email, phone, CallbackURL)
+
+#     authority = req.json()
+#     if len(req.json()['errors']) == 0:
+#         return redirect(ZP_API_STARTPAY.format(authority=authority))
+#     else:
+#         e_code = req.json()['errors']['code']
+#         e_message = req.json()['errors']['message']
+#         return HttpResponse(f"Error code: {e_code}, Error Message: {e_message}")
+
+
+# def verify(request):
+#     t_status = request.GET.get('Status')
+#     t_authority = request.GET['Authority']
+#     if request.GET.get('Status') == 'OK':
+#         req_header = {"accept": "application/json",
+#                       "content-type": "application/json'"}
+#         req_data = {
+#             "merchant_id": MERCHANT,
+#             "amount": amount,
+#             "authority": t_authority
+#         }
+#         req = requests.post(url=ZP_API_VERIFY, data=json.dumps(
+#             req_data), headers=req_header)
+#         if len(req.json()['errors']) == 0:
+#             t_status = req.json()['data']['code']
+#             if t_status == 100:
+#                 return HttpResponse('Transaction success.\nRefID: ' + str(
+#                     req.json()['data']['ref_id']
+#                 ))
+#             elif t_status == 101:
+#                 return HttpResponse('Transaction submitted : ' + str(
+#                     req.json()['data']['message']
+#                 ))
+#             else:
+#                 return HttpResponse('Transaction failed.\nStatus: ' + str(
+#                     req.json()['data']['message']
+#                 ))
+#         else:
+#             e_code = req.json()['errors']['code']
+#             e_message = req.json()['errors']['message']
+#             return HttpResponse(f"Error code: {e_code}, Error Message: {e_message}")
+#     else:
+#         return HttpResponse('Transaction failed or canceled by user')
