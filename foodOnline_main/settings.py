@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'django.contrib.gis',
     'customers',
     'orders',
+    'zarinpal',
+    
     
 ]
 
