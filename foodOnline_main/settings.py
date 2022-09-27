@@ -51,32 +51,23 @@ INSTALLED_APPS = [
 ]
 
 AZ_IRANIAN_BANK_GATEWAYS = {
-    'GATEWAYS': {
-        
-        
-        'ZARINPAL': {
-            
-            'SANDBOX': 1,  # 0 disable, 1 active
-        },
-        'IDPAY': {
-            
-            'X_SANDBOX': 1,  # 0 disable, 1 active
-        },
-        
-        
+   'GATEWAYS': {
+       'ZARINPAL': {
+           'SANDBOX': 1,  # 0 disable, 1 active
+       },
+    #    'IDPAY': {
+    #        'X_SANDBOX': 1,  # 0 disable, 1 active
+    #    },
+   },
+   'DEFAULT': 'ZARINPAL',
+   'CURRENCY': 'IRR', # اختیاری
+   'TRACKING_CODE_QUERY_PARAM': 'tc', # اختیاری
+   'TRACKING_CODE_LENGTH': 16, # اختیاری
+   'SETTING_VALUE_READER_CLASS': 'azbankgateways.readers.DefaultReader', # اختیاری
+   'BANK_PRIORITIES': [
        
-    },
-    'IS_SAMPLE_FORM_ENABLE': True,  # اختیاری و پیش فرض غیر فعال است
-    'DEFAULT': 'IDPAY',
-    'CURRENCY': 'IRR',  # اختیاری
-    'TRACKING_CODE_QUERY_PARAM': 'tc',  # اختیاری
-    'TRACKING_CODE_LENGTH': 16,  # اختیاری
-    'SETTING_VALUE_READER_CLASS': 'azbankgateways.readers.DefaultReader',  # اختیاری
-    'BANK_PRIORITIES': [
-        'ZARINPAL'
-        
-        # and so on ...
-    ],  # اختیاری
+       # and so on ...
+   ], # اختیاری
 }
 
 
