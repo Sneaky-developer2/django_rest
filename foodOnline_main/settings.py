@@ -50,25 +50,25 @@ INSTALLED_APPS = [
     'azbankgateways',
 ]
 
-AZ_IRANIAN_BANK_GATEWAYS = {
-   'GATEWAYS': {
-       'ZARINPAL': {
-           'SANDBOX': 1,  # 0 disable, 1 active
-       },
-    #    'IDPAY': {
-    #        'X_SANDBOX': 1,  # 0 disable, 1 active
-    #    },
-   },
-   'DEFAULT': 'ZARINPAL',
-   'CURRENCY': 'IRR', # اختیاری
-   'TRACKING_CODE_QUERY_PARAM': 'tc', # اختیاری
-   'TRACKING_CODE_LENGTH': 16, # اختیاری
-   'SETTING_VALUE_READER_CLASS': 'azbankgateways.readers.DefaultReader', # اختیاری
-   'BANK_PRIORITIES': [
+# AZ_IRANIAN_BANK_GATEWAYS = {
+#    'GATEWAYS': {
+#        'ZARINPAL': {
+#            'SANDBOX': 1,  # 0 disable, 1 active
+#        },
+#     #    'IDPAY': {
+#     #        'X_SANDBOX': 1,  # 0 disable, 1 active
+#     #    },
+#    },
+#    'DEFAULT': 'ZARINPAL',
+#    'CURRENCY': 'IRR', # اختیاری
+#    'TRACKING_CODE_QUERY_PARAM': 'tc', # اختیاری
+#    'TRACKING_CODE_LENGTH': 16, # اختیاری
+#    'SETTING_VALUE_READER_CLASS': 'azbankgateways.readers.DefaultReader', # اختیاری
+#    'BANK_PRIORITIES': [
        
-       # and so on ...
-   ], # اختیاری
-}
+#        # and so on ...
+#    ], # اختیاری
+# }
 
 
 MIDDLEWARE = [
